@@ -1,0 +1,25 @@
+{
+  "name": "practicaexpress",
+  "version": "1.0.0",
+  "description": "API usando Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinAGC/PracticaExpress.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Kevin Abel Garcia Carrasco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinAGC/PracticaExpress/issues"
+  },
+  "homepage": "https://github.com/KevinAGC/PracticaExpress#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
