@@ -1,15 +1,15 @@
-const mysql=require('mysql');
+//const conexionsql = require("mssql");
 
 //Set database connection credentials
 const config= {
-    host:'localhost',
-    user:'root',
-    password:'root',
-    database:'api',
+    user:  "usuario",
+    password: "1234",
+    server: "DESKTOP-G2MF1F8",
+    database: "api",
+    options:{
+        trustServerCertificate: true,
+    }
 };
 
-//Create a MySQL pool
-const pool = mysql.createPool(config);
-
 //Export the pool
-module.exports=pool;
+module.exports = config;
