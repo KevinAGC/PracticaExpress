@@ -18,5 +18,38 @@ const router = (app) => {
       response.send(result);
     });
   });
+
+  app.get("/users/:id", (request, response) => {
+    const id = request.params.id;
+    pool.query("SELECT * FROM usuarios WHERE id = ?", id, (error, result) => {
+      if (error) throw error;
+      response.send(result);
+    });
+  });
+
+  app.post("/users", (request, response) => {
+    pool.query("INSERT INTO usuarios SET ?", request.body, (error, result) => {
+      if (error) throw error;
+      response.status(201).send(`User added with ID: ${result.insertId}`);
+    });
+  });
+
+  app.put("/users/:id", (request, response) => {
+    const id = request.params.id;
+    pool.query("UPDATE usuarios SET ? WHERE id = ?", [request.body,id], (error, result) => {
+      if (error) throw error;
+      response.status(201).send(`User updated succesfully`);
+    });
+  });
+
+  app.delete("/users/:id", (request, response) => {
+    const id = request.params.id;
+    pool.query("DELETE FROM usuarios WHERE id = ?", id, (error, result) => {
+      if (error) throw error;
+      response.status(201).send(`User deleted succesfully`);
+    });
+  });
+
 };
+
 module.exports = router;
