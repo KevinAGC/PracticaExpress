@@ -1,4 +1,4 @@
-//const conexionsql = require("mssql");
+const sql = require("mssql");
 
 //Set database connection credentials
 const config= {
@@ -10,6 +10,16 @@ const config= {
         trustServerCertificate: true,
     }
 };
+const pool = new sql.ConnectionPool(config)
+    .connect()
+    .then(pool => {
+        console.log('Conectado a la base de datos');
+        return pool;
+    }).catch(err => {
+        console.log('Error en la conexion a base de datos ' + err);
+    });
+
+
 
 //Export the pool
-module.exports = config;
+module.exports = pool;
