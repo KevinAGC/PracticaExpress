@@ -36,7 +36,8 @@ const router = (app) => {
       const results = await db
         .request()
         .input("nombre", sql.VarChar, request.body.nombre)
-        .query("INSERT INTO users OUTPUT INSERTED.id VALUES(@nombre) ");
+        .query("INSERT INTO usuarios OUTPUT INSERTED.id VALUES(@nombre) ");
+        //.query("INSERT INTO usuarios OUTPUT INSERTED.id VALUES(@nombre) ");
       response
         .status(201)
         .send(`User added with id ${results.recordset.flat()[0].id}`);
@@ -53,7 +54,7 @@ const router = (app) => {
         .request()
         .input("nombre", sql.VarChar, request.body.nombre)
         .input("id", sql.VarChar, id)
-        .query("UPDATE users SET nombre = @nombre WHERE id = @id");
+        .query("UPDATE usuarios SET nombre = @nombre WHERE id = @id");
       response.send("User updated successfully");
     } catch (error) {
       console.log(error);
@@ -106,7 +107,8 @@ const router = (app) => {
       const results = await db
         .request()
         .input("nombre", sql.VarChar, request.body.nombre)
-        .query("INSERT INTO products OUTPUT INSERTED.id VALUES(@nombre) ");
+        .input("stock", sql.VarChar, request.body.stock)
+        .query("INSERT INTO productos OUTPUT INSERTED.id VALUES(@nombre,@stock) ");
       response
         .status(201)
         .send(`User added with id ${results.recordset.flat()[0].id}`);
@@ -121,9 +123,10 @@ const router = (app) => {
       const id = request.params.id;
       const results = await db
         .request()
-        .input("nombre", sql.VarChar, request.body.nombre)
         .input("id", sql.VarChar, id)
-        .query("UPDATE products SET nombre = @nombre WHERE id = @id");
+        .input("nombre", sql.VarChar, request.body.nombre)
+        .input("stock", sql.VarChar, request.body.stock)
+        .query("UPDATE productos SET nombre = @nombre, stock = @stock WHERE id = @id");
       response.send("User updated successfully");
     } catch (error) {
       console.log(error);
